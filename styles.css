@@ -61,3 +61,19 @@ button:active {
         justify-content: center;
     }
 }
+
+/* Add to existing styles */
+.series-selection button {
+    background-color: #2196F3;
+}
+
+/* Add transition for screen changes */
+.setup-screen {
+    transition: opacity 0.3s ease;
+}
+
+.setup-screen:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}

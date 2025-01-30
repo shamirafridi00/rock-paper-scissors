@@ -23,6 +23,7 @@ function handleSeriesSelection(seriesLength) {
 function navigateToNextSetupStep() {
     // Hide series selection
     document.querySelector('[data-screen="series"]').classList.remove('active');
+    document.querySelector('[data-screen="type"]').classList.add('active');
     
     // For now, just log the progress
     console.log('Game Settings:', GameSettings);

@@ -1,4 +1,5 @@
-// Game mode selection module
+import { GameSettings } from './gameState.js';  // Add this import
+
 export function initializeModeSelection() {
     const modeButtons = document.querySelectorAll('.mode-btn');
     

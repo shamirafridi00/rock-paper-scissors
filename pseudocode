@@ -1,0 +1,216 @@
+Rock Paper Scissors Game Documentation
+1. Game Overview
+A responsive Rock Paper Scissors game with Human vs Human and Human vs Computer modes, featuring time attack, best of series options, and mobile-first design.
+2. Features Breakdown
+Core Features
+Game Mode Selection (HvH/HvC)
+Player Name Entry
+Basic Game Mechanics
+Score Tracking
+Leaderboard
+Responsive Design
+Additional Features
+Time Attack Mode
+5 seconds per move
+Skip turn if time expires
+Quick decision making
+Best of Series
+Best of 3 (First to 2 wins)
+Best of 5 (First to 3 wins)
+Best of 7 (First to 4 wins)
+3. Game Flow
+text
+Start
+├── Game Mode Selection
+│   ├── Human vs Human
+│   └── Human vs Computer
+├── Series Selection
+│   ├── Best of 3
+│   ├── Best of 5
+│   └── Best of 7
+├── Game Type
+│   ├── Normal Mode
+│   └── Time Attack Mode
+├── Player Setup
+├── Main Game Loop
+└── End Game/Results
+4. Detailed Pseudocode
+text
+// INITIALIZATION
+STRUCT GameSettings {
+    gameMode: String  // 'hvh' or 'hvc'
+    seriesType: Integer // 3, 5, or 7
+    timeAttack: Boolean
+    timeLimit: Integer // 5000ms for time attack
+    player1Name: String
+    player2Name: String
+}
+
+STRUCT GameState {
+    player1Score: Integer
+    player2Score: Integer
+    currentRound: Integer
+    totalRounds: Integer
+    currentPlayer: Integer
+    timer: Integer
+    gameActive: Boolean
+}
+
+// MAIN GAME SETUP
+FUNCTION initializeGame()
+    CREATE GameSettings
+    CREATE GameState
+    INITIALIZE UI elements
+    SETUP event listeners
+    LOAD leaderboard from localStorage
+
+// GAME MODE SETUP
+FUNCTION setupGame(settings)
+    SET GameSettings based on user selection
+    CALCULATE required wins based on series type
+    INITIALIZE scores to 0
+    SETUP UI based on game mode
+    IF timeAttack
+        INITIALIZE timer
+    START game
+
+// TIMER FUNCTIONALITY
+FUNCTION startTimer()
+    IF timeAttack
+        SET timer = 5000
+        START countdown
+        IF timer reaches 0
+            HANDLE timeout
+            SWITCH players
+
+// GAMEPLAY FUNCTIONS
+FUNCTION handlePlayerMove(choice)
+    IF !gameActive RETURN
+    
+    IF timeAttack
+        CLEAR timer
+    
+    IF gameMode is 'hvh'
+        STORE current player choice
+        SWITCH players
+        IF both players chose
+            DETERMINE round winner
+    ELSE
+        GET computer choice
+        DETERMINE round winner
+    
+    UPDATE scores
+    CHECK for series winner
+
+FUNCTION determineWinner(choice1, choice2)
+    // Standard RPS logic
+    RETURN winner
+
+FUNCTION updateScores(winner)
+    INCREMENT winner's score
+    UPDATE UI
+    IF winner reached required wins
+        END series
+    ELSE
+        START next round
+
+// LEADERBOARD MANAGEMENT
+FUNCTION updateLeaderboard(gameResult)
+    LOAD existing leaderboard
+    UPDATE player statistics
+    SORT leaderboard
+    SAVE to localStorage
+    DISPLAY updated leaderboard
+5. UI Components Structure
+xml
+<div class="game-container">
+    <!-- Initial Setup Screens -->
+    <div class="setup-screens">
+        <!-- Game Mode Selection -->
+        <div class="mode-selection">
+            <button data-mode="hvh">Human vs Human</button>
+            <button data-mode="hvc">Human vs Computer</button>
+        </div>
+
+        <!-- Series Selection -->
+        <div class="series-selection">
+            <button data-series="3">Best of 3</button>
+            <button data-series="5">Best of 5</button>
+            <button data-series="7">Best of 7</button>
+        </div>
+
+        <!-- Mode Selection -->
+        <div class="type-selection">
+            <button data-type="normal">Normal Mode</button>
+            <button data-type="time">Time Attack</button>
+        </div>
+    </div>
+
+    <!-- Main Game Interface -->
+    <div class="game-interface">
+        <!-- Score Display -->
+        <div class="score-board">
+            <div class="player1"></div>
+            <div class="player2"></div>
+        </div>
+
+        <!-- Timer (Time Attack Mode) -->
+        <div class="timer-display"></div>
+
+        <!-- Game Controls -->
+        <div class="controls">
+            <button class="choice" data-choice="rock">✊</button>
+            <button class="choice" data-choice="paper">✋</button>
+            <button class="choice" data-choice="scissors">✌️</button>
+        </div>
+
+        <!-- Results Display -->
+        <div class="results"></div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="leaderboard"></div>
+</div>
+6. Responsive Design Breakpoints
+css
+/* Mobile First Approach */
+/* Base styles for mobile */
+@media (min-width: 320px) {
+    /* Small mobile devices */
+}
+
+@media (min-width: 768px) {
+    /* Tablets */
+}
+
+@media (min-width: 1024px) {
+    /* Desktop */
+}
+7. Required Assets
+Game icons (Rock, Paper, Scissors)
+Sound effects (optional)
+Timer sound (for Time Attack mode)
+Victory/Defeat animations
+Responsive background images
+8. Data Storage Structure (localStorage)
+javascript
+{
+    leaderboard: {
+        players: [
+            {
+                name: String,
+                wins: Integer,
+                totalGames: Integer,
+                winRate: Float
+            }
+        ],
+        recentGames: [
+            {
+                winner: String,
+                loser: String,
+                mode: String,
+                timestamp: Date
+            }
+        ]
+    }
+}

@@ -99,3 +99,295 @@ button:active {
         flex-direction: row;
     }
 }
+
+/* Add to styles.css */
+
+/* Player Setup Screen */
+.player-setup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.player-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.player-input label {
+    font-weight: bold;
+}
+
+.player-input input {
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#start-game-btn {
+    margin-top: 1rem;
+    background-color: #9C27B0;
+}
+
+/* Game Screen */
+.game-screen, .results-screen, .leaderboard-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.score-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+}
+
+.player1-info, .player2-info {
+    text-align: center;
+}
+
+.vs {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.score {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.round-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.timer-container {
+    width: 200px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.timer-bar {
+    height: 100%;
+    background-color: #F44336;
+    width: 100%;
+    transition: width 1s linear;
+}
+
+#timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.choice-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.choice-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.choice-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #eee;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+.choice-btn:hover {
+    background-color: #ddd;
+}
+
+.choice-btn.selected {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #2E7D32;
+}
+
+.choice-btn.computer-selected {
+    background-color: #F44336;
+    color: white;
+    border-color: #C62828;
+}
+
+.round-result {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    min-height: 2rem;
+    text-align: center;
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+}
+
+#next-round-btn {
+    background-color: #2196F3;
+}
+
+#finish-game-btn {
+    background-color: #F44336;
+}
+
+button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+/* Results Screen */
+.results-screen {
+    text-align: center;
+}
+
+#game-winner {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+}
+
+#final-score {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+#play-again-btn {
+    background-color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+#view-leaderboard-btn {
+    background-color: #FF9800;
+}
+
+/* Leaderboard Screen */
+#leaderboard-content {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem 0;
+}
+
+#back-to-menu-btn {
+    background-color: #2196F3;
+}
+
+/* Responsiveness for Game Area */
+@media (min-width: 768px) {
+    .game-area {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .choice-display {
+        width: 45%;
+    }
+}
+
+/* Add to styles.css */
+
+/* Game styling enhancements */
+
+/* Animation for choice buttons */
+.choice-btn {
+    transition: all 0.2s ease;
+}
+
+.choice-btn:hover {
+    transform: scale(1.1);
+}
+
+.choice-btn.selected {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+/* Round result animation */
+.round-result {
+    transition: all 0.3s ease;
+}
+
+/* Timer animation for time attack */
+@keyframes timerPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.timer-bar.warning {
+    animation: timerPulse 0.5s infinite;
+}
+
+/* Winner display styling */
+#game-winner {
+    color: #4CAF50;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Enhanced visuals for screens */
+.setup-screen h1, .results-screen h1, .leaderboard-screen h1 {
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+/* Better button hover effects */
+button:hover:not(:disabled) {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+/* Consistent button styling */
+button {
+    transition: all 0.2s ease;
+}
+
+/* Round transition animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.game-area {
+    animation: fadeIn 0.5s ease;
+}

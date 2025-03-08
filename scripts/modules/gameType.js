@@ -1,4 +1,5 @@
 import { GameSettings } from './gameState.js';
+import { goToPlayerSetup } from '../main.js';
 
 export function initializeGameTypeSelection() {
     const typeButtons = document.querySelectorAll('.type-btn');
@@ -15,11 +16,13 @@ function handleGameTypeSelection(gameType) {
     // Update game settings
     GameSettings.timeAttack = (gameType === 'time');
     
-    // Proceed to next step (temporary console log)
+    // Log current settings
     console.log('Game Type Selected:', GameSettings.timeAttack);
     console.log('Current Settings:', GameSettings);
     
-    // Next step: Player setup (to be implemented later)
-    // For now, just hide the type selection
+    // Hide the type selection
     document.querySelector('[data-screen="type"]').classList.remove('active');
+    
+    // Proceed to player setup
+    goToPlayerSetup();
 }

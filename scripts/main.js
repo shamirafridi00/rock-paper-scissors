@@ -3,19 +3,53 @@ import { GameSettings, GameState } from './modules/gameState.js';
 import { initializeModeSelection } from './modules/gameModes.js';
 import { initializeSeriesSelection } from './modules/seriesSelection.js';
 import { initializeGameTypeSelection } from './modules/gameType.js';
-import { initializePlayerSetup } from './modules/playerSetup.js';
 
 // Initialize game setup
 function initGame() {
-    initializeModeSelection();
-    initializeSeriesSelection();
-    initializeGameTypeSelection();
+    try {
+        console.log("Initializing game...");
+        
+        // Check if all required elements exist
+        checkRequiredElements();
+        
+        // Initialize game modules
+        initializeModeSelection();
+        initializeSeriesSelection();
+        initializeGameTypeSelection();
+        
+        // Additional setup for CSS
+        setupAdditionalCSS();
+        
+        console.log("Game initialization complete!");
+    } catch (error) {
+        console.error("Error during game initialization:", error);
+    }
+}
+
+function checkRequiredElements() {
+    const requiredSelectors = [
+        '[data-screen="mode"]',
+        '[data-screen="series"]',
+        '[data-screen="type"]',
+        '.mode-btn',
+        '.series-btn',
+        '.type-btn'
+    ];
     
-    // Additional setup for CSS
-    setupAdditionalCSS();
+    const missingElements = [];
     
-    // Setup result screen buttons
-    setupResultButtons();
+    requiredSelectors.forEach(selector => {
+        const element = document.querySelector(selector);
+        if (!element) {
+            missingElements.push(selector);
+        }
+    });
+    
+    if (missingElements.length > 0) {
+        console.warn("Missing required elements:", missingElements);
+    } else {
+        console.log("All required elements found!");
+    }
 }
 
 function setupAdditionalCSS() {
@@ -57,38 +91,32 @@ function setupAdditionalCSS() {
     document.head.appendChild(leaderboardStyle);
 }
 
-function setupResultButtons() {
-    // These buttons will be properly initialized when needed, 
-    // but we'll set up their event listeners here for future use
-    const playAgainBtn = document.getElementById('play-again-btn');
-    const viewLeaderboardBtn = document.getElementById('view-leaderboard-btn');
-    const backToMenuBtn = document.getElementById('back-to-menu-btn');
-    
-    if (playAgainBtn) {
-        playAgainBtn.addEventListener('click', () => {
-            // Reset game state and return to first screen
-            location.reload();
-        });
-    }
-    
-    if (viewLeaderboardBtn) {
-        viewLeaderboardBtn.addEventListener('click', () => {
-            document.querySelector('.results-screen').style.display = 'none';
-            document.querySelector('.leaderboard-screen').style.display = 'flex';
-        });
-    }
-    
-    if (backToMenuBtn) {
-        backToMenuBtn.addEventListener('click', () => {
-            location.reload();
-        });
-    }
-}
-
 // Start game when DOM is loaded
 document.addEventListener('DOMContentLoaded', initGame);
 
-// Export a function to move to player setup
-export function goToPlayerSetup() {
-    initializePlayerSetup();
+// Export function to initialize player setup
+export function initializePlayerSetup() {
+    try {
+        // Dynamically import the player setup module
+        import('./modules/playerSetup.js')
+            .then(module => {
+                module.initializePlayerSetup();
+            })
+            .catch(err => {
+                console.error("Error loading player setup module:", err);
+                // Fallback to show an error message
+                const gameContainer = document.querySelector('.game-container');
+                if (gameContainer) {
+                    gameContainer.innerHTML = `
+                        <div class="error-message">
+                            <h2>Oops! Something went wrong.</h2>
+                            <p>There was an error loading the game. Please refresh the page and try again.</p>
+                            <button onclick="location.reload()">Refresh</button>
+                        </div>
+                    `;
+                }
+            });
+    } catch (error) {
+        console.error("Error initializing player setup:", error);
+    }
 }

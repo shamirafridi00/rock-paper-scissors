@@ -22,13 +22,32 @@ function handleSeriesSelection(seriesLength) {
 
 function navigateToNextSetupStep() {
     // Hide series selection
-    document.querySelector('[data-screen="series"]').classList.remove('active');
-    document.querySelector('[data-screen="type"]').classList.add('active');
+    const seriesScreen = document.querySelector('[data-screen="series"]');
+    const typeScreen = document.querySelector('[data-screen="type"]');
     
-    // For now, just log the progress
+    // Add safety check to prevent errors
+    if (seriesScreen) {
+        seriesScreen.classList.remove('active');
+    } else {
+        console.error("Could not find series screen element");
+    }
+    
+    if (typeScreen) {
+        typeScreen.classList.add('active');
+    } else {
+        console.error("Could not find type screen element");
+        
+        // Fallback: Check if the player setup screen exists and show that instead
+        const playerSetupScreen = document.querySelector('[data-screen="player-setup"]');
+        if (playerSetupScreen) {
+            console.log("Falling back to player setup screen");
+            playerSetupScreen.classList.add('active');
+        } else {
+            console.error("Could not find player setup screen either");
+        }
+    }
+    
+    // Log the progress
     console.log('Game Settings:', GameSettings);
     console.log('Game State:', GameState);
-    
-    // Next step (to be implemented in next phase)
-    // This will be either game type selection or player setup
 }

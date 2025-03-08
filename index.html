@@ -7,43 +7,56 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-container">
-        <!-- Mode Selection Screen -->
-        <div class="setup-screen active" data-screen="mode">
-            <h1>Choose Game Mode</h1>
-            <div class="mode-selection">
-                <button class="mode-btn" data-mode="hvh">Human vs Human</button>
-                <button class="mode-btn" data-mode="hvc">Human vs Computer</button>
-            </div>
+   <!-- This should be in your index.html inside the game-container div -->
+<div class="game-container">
+    <!-- Mode Selection Screen -->
+    <div class="setup-screen active" data-screen="mode">
+        <h1>Choose Game Mode</h1>
+        <div class="mode-selection">
+            <button class="mode-btn" data-mode="hvh">Human vs Human</button>
+            <button class="mode-btn" data-mode="hvc">Human vs Computer</button>
         </div>
-
-        <!-- Series Selection Screen -->
-        <div class="setup-screen" data-screen="series">
-            <h1>Choose Series Length</h1>
-            <div class="series-selection">
-                <button class="series-btn" data-series="3">Best of 3</button>
-                <button class="series-btn" data-series="5">Best of 5</button>
-                <button class="series-btn" data-series="7">Best of 7</button>
-            </div>
-        </div>
-
-       <!-- Add this to index.html after the type selection screen -->
-<div class="setup-screen" data-screen="player-setup">
-    <h1>Player Setup</h1>
-    <div class="player-setup">
-        <div class="player-input">
-            <label for="player1">Player 1</label>
-            <input type="text" id="player1" placeholder="Enter name">
-        </div>
-        <div id="player2-container" class="player-input">
-            <label for="player2">Player 2</label>
-            <input type="text" id="player2" placeholder="Enter name">
-        </div>
-        <button id="start-game-btn">Start Game</button>
     </div>
-</div>
 
-<!-- Game Interface - Add after setup screens -->
+    <!-- Series Selection Screen -->
+    <div class="setup-screen" data-screen="series">
+        <h1>Choose Series Length</h1>
+        <div class="series-selection">
+            <button class="series-btn" data-series="3">Best of 3</button>
+            <button class="series-btn" data-series="5">Best of 5</button>
+            <button class="series-btn" data-series="7">Best of 7</button>
+        </div>
+    </div>
+
+    <!-- Game Type Selection Screen -->
+    <div class="setup-screen" data-screen="type">
+        <h1>Select Game Type</h1>
+        <div class="type-selection">
+            <button class="type-btn" data-type="normal">Normal Mode</button>
+            <button class="type-btn" data-type="time">Time Attack</button>
+        </div>
+    </div>
+
+
+    <!-- Player Setup Screen -->
+    <div class="setup-screen" data-screen="player-setup">
+        <h1>Player Setup</h1>
+        <div class="player-setup">
+            <div class="player-input">
+                <label for="player1">Player 1</label>
+                <input type="text" id="player1" placeholder="Enter name">
+            </div>
+            <div id="player2-container" class="player-input">
+                <label for="player2">Player 2</label>
+                <input type="text" id="player2" placeholder="Enter name">
+            </div>
+            <button id="start-game-btn">Start Game</button>
+        </div>
+    </div>
+
+    <!-- Add this to your index.html, right after the setup screens -->
+
+<!-- Game Interface -->
 <div class="game-screen">
     <div class="score-display">
         <div class="player1-info">
@@ -108,6 +121,20 @@
     <div id="leaderboard-content"></div>
     <button id="back-to-menu-btn">Back to Menu</button>
 </div>
+
+div class="game-screen">
+    <div class="score-display">
+        <div class="player1-info">
+            <h2 id="player1-name">Player 1</h2>
+            <p class="score" id="player1-score">0</p>
+        </div>
+        <div class="vs">VS</div>
+        <div class="player2-info">
+            <h2 id="player2-name">Player 2</h2>
+            <p class="score" id="player2-score">0</p>
+        </div>
+    </div>
+    
 
     <script type="module" src="scripts/main.js"></script>
 </body>
